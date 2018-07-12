@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>第一周</title>
+  <meta charset='utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'>
+  <style>
+.note-content  {font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, Song, sans-serif;}
+  html{font-size: 16px;}
+  body{max-width: 1125px; margin: 0 auto;}
+  a:hover{text-decoration: none;}
+  .mod-box{display: flex; }
+  .mod-left,
+  .mod-right{display: inline-block;}
+  .mod-left{height: 100%; background: #fff; position: fixed; overflow: auto; padding-bottom: 10%;}
+  .mod-left ul{margin: 0; padding-left: 1rem; }
+  .mod-right{ margin-left: 32%;}
+  .bootom{position: fixed;width: 50px; height: 50px; bottom: 20px; right: 20px; background: rgba(0,0,0,.5); border-radius: 50px; text-align: center;}
+  .bootom span{ display: inline-block; color: #fff; line-height: 50px; text-align: center;}
+  pre,
+  blockquote,
+  .hljs-dark .hljs{max-width: 50.0rem;}
+  @media screen and (min-width: 320px) and (max-width: 1024px){
+    body{max-width: 750px; margin: 0 auto;}
+    .mod-box{display: block; }
+    .mod-left{position: relative;}
+    .mod-right{padding:0 ; margin:0;}
+  }
+
+</style>
+</head>
+<body>
+<div id='preview-contents' class='note-content'>
+                                      
+
+<div class="mod-box">
+  
+  <a id="name"></a>
+  <div class="mod-left">
+    <div class="toc">
+      <div class="toc">
+        <ul>
+        <li><ul>
+        <li><a href="#数据类型转换">数据类型转换</a><ul>
+        <li><a href="#对象和对象">对象和对象</a></li>
+        <li><a href="#对象和数字">对象和数字</a></li>
+        <li><a href="#对象和字符串">对象和字符串</a></li>
+        <li><a href="#对象和布尔">对象和布尔</a></li>
+        </ul>
+        </li>
+        <li><a href="#字符串方法">字符串方法</a><ul>
+        <li><a href="#charat">charAt</a></li>
+        <li><a href="#charcodeat">charCodeAt</a></li>
+        <li><a href="#touppercase">toUpperCase</a></li>
+        <li><a href="#tolowercase">toLowerCase</a></li>
+        <li><a href="#slice">slice</a></li>
+        <li><a href="#substr">substr</a></li>
+        <li><a href="#substring">substring</a></li>
+        <li><a href="#split">split</a></li>
+        <li><a href="#concat">concat</a></li>
+        <li><a href="#indeof">indeOf</a></li>
+        <li><a href="#lastindexof">lastIndexOf</a></li>
+        <li><a href="#replace">replace</a></li>
+        <li><a href="#trim">trim</a></li>
+        </ul>
+        </li>
+        <li><a href="#变量提升">变量提升</a></li>
+        <li><a href="#变量提升特殊情况">变量提升特殊情况</a></li>
+        <li><a href="#对象的定义">对象的定义</a></li>
+                <ul>
+        <li><ul>
+        <li><a href="#day1">Day1</a><ul>
+        <li><a href="#git">Git</a></li>
+        <li><a href="#变量提升">变量提升</a></li>
+        <li><a href="#带var和不带var区别">带var和不带var区别</a></li>
+        <li><a href="#函数的变量提升">函数的变量提升</a></li>
+        <li><a href="#let-和-const-之变量提升">let 和 const 之变量提升</a></li>
+        <li><a href="#作用域及作用域链">作用域及作用域链</a></li>
+        <li><a href="#堆栈内存及释放">堆栈内存及释放</a></li>
+        <li><a href="#js中的堆栈内存">JS中的堆栈内存</a></li>
+        <li><a href="#闭包">闭包</a></li>
+        </ul>
+        </li>
+        <li><a href="#day2">Day2</a><ul>
+        <li><a href="#单例模式">单例模式</a></li>
+        <li><a href="#高级单例模式">高级单例模式</a></li>
+        <li><a href="#面向对象">面向对象</a></li>
+        <li><a href="#js中的内置类">js中的内置类</a></li>
+        <li><a href="#构造函数模式">构造函数模式</a></li>
+        <li><a href="#原型模式">原型模式</a></li>
+        <li><a href="#object类和function类">object类和function类</a></li>
+        </ul>
+        </li>
+        </ul>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<div class="mod-right">
+  <h2 id="数据类型转换">数据类型转换</h2>
+
+<blockquote>
+  <p>在使用==进行比较的时候，如果左右两边数据类型不相同，浏览器会默认转换为相同的类型，然后再比较（ = == 不会这样操作）</p>
+</blockquote>
+
+<h3 id="对象和对象">对象和对象</h3>
+
+<p>比较的是空间地址，不是相同的空间，结果肯定是 <strong>false</strong></p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">[]==[] <span class="hljs-comment">//=&gt;false</span>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> a={};
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> b=a;
+</div><div class="hljs-line">a==b <span class="hljs-comment">//=&gt;true</span>
+</div></code></pre>
+
+
+
+<h3 id="对象和数字">对象和数字</h3>
+
+<p>把对象转换为数字</p>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">[]==<span class="hljs-number">0</span> <span class="hljs-comment">//=&gt;true</span>
+</div><div class="hljs-line">({})==<span class="hljs-literal">NaN</span> <span class="hljs-comment">//=&gt;false NaN和自己不相等和其它任何值都不相等</span>
+</div></code></pre>
+
+
+
+<h3 id="对象和字符串">对象和字符串</h3>
+
+<p>对象先转字符串，然后进行比较</p>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">[]==<span class="hljs-string">''</span> <span class="hljs-comment">//=&gt;true</span>
+</div></code></pre>
+
+
+
+<h3 id="对象和布尔">对象和布尔</h3>
+
+<p>把两边都转换数字</p>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">[]==<span class="hljs-literal">true</span> <span class="hljs-comment">//=&gt;0==1 -&gt;false</span>
+</div><div class="hljs-line">[]==<span class="hljs-literal">false</span> <span class="hljs-comment">//=&gt;0==0 -&gt;true</span>
+</div><div class="hljs-line">![]==<span class="hljs-literal">false</span> <span class="hljs-comment">//=&gt;![] 把数组变为布尔在取反=false -&gt;false==false -&gt;true</span>
+</div></code></pre>
+
+<blockquote>
+  <p><code>规律：两个等于号比较，左右两边数据值的类型不一样，浏览器会把两边的类型都转换为数字然后再比较，但是null和undefined除外 <br>
+  null==undefined //=&gt;true <br>
+  null===undefined //=&gt;false <br>
+  null==0 //=&gt;false null以及undefined和其它任何值都不相等</code></p>
+</blockquote>
+
+<h2 id="字符串方法">字符串方法</h2>
+
+
+
+<h3 id="charat">charAt</h3>
+
+<p>通过索引获取对应的字符</p>
+
+
+
+<h3 id="charcodeat">charCodeAt</h3>
+
+<p>通过索引获取对应的字符Unicode编码</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//0~9 48-57; a~z 97-122; A~Z 65~90</span>
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str.charCodeAt(<span class="hljs-number">1</span>));
+</div></code></pre>
+
+
+
+<h3 id="touppercase">toUpperCase</h3>
+
+<p>将小写字母转成大写字母</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str.toUpperCase());
+</div></code></pre>
+
+
+
+<h3 id="tolowercase">toLowerCase</h3>
+
+<p>将大写字母转成小写字母</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">var</span>  str = <span class="hljs-string">"ABC"</span>
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str.toLowerCase());
+</div></code></pre>
+
+
+
+<h3 id="slice">slice</h3>
+
+<p>slice(m,n):从索引m开始截取到n，不包含n</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str.slice(<span class="hljs-number">1</span>)); <span class="hljs-comment">//截取到末尾</span>
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str.slice(<span class="hljs-number">1</span>,<span class="hljs-number">6</span>));
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.lgo(str.slice(<span class="hljs-number">1</span>,<span class="hljs-number">-1</span>));
+</div></code></pre>
+
+
+
+<h3 id="substr">substr</h3>
+
+<p>substr(m,n):从索引m开始，截取到n个</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str.substr(<span class="hljs-number">2</span>,<span class="hljs-number">0</span>));
+</div></code></pre>
+
+
+
+<h3 id="substring">substring</h3>
+
+<p>从索引m开始，截取到n，不包含n</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str.substring(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>));
+</div></code></pre>
+
+
+
+<h3 id="split">split</h3>
+
+<p>将字符串按照特定的字母分割成数组中的每一项</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str.split(<span class="hljs-string">" "</span>));
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str.split(<span class="hljs-string">""</span>));
+</div></code></pre>
+
+
+
+<h3 id="concat">concat</h3>
+
+<p>字符串拼接</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str.concat(<span class="hljs-string">"123"</span>));
+</div></code></pre>
+
+
+
+<h3 id="indeof">indeOf</h3>
+
+<p>检测当前字符在字符串中第一次出现的索引位置，如果不存在，返回-1</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str.indexOf(<span class="hljs-string">"a"</span>));
+</div></code></pre>
+
+
+
+<h3 id="lastindexof">lastIndexOf</h3>
+
+<p>检测当前字符在字符串中最后一次出现的索引位置，如果不存在，返回-1</p>
+
+
+
+<h3 id="replace">replace</h3>
+
+<p>替换  原有字符不发生变化</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//replace(oldStr,newStr);</span>
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str.replace(<span class="hljs-string">"a"</span>,<span class="hljs-string">"A"</span>));
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(str);
+</div></code></pre>
+
+
+
+<h3 id="trim">trim</h3>
+
+<p>去掉字符串左右两边的空格，不能去掉中间的</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//trimLeft:去掉字符串左边的空格</span>
+</div><div class="hljs-line"> <span class="hljs-comment">//trimRight:去掉字符串右边的空格</span>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> trimStr=<span class="hljs-string">"  88  hello "</span>
+</div></code></pre>
+
+
+
+<h2 id="变量提升">变量提升</h2>
+
+<p>在全局作用域中，对var和function进行变量提升，var的只声明不定义，function声明+定义</p>
+
+
+
+<h2 id="变量提升特殊情况">变量提升特殊情况</h2>
+
+<ol><li rel="1">不管条件是否成立都要进行变量提升；</li>
+<li rel="2">等号右边不变量提升；</li>
+<li rel="3">return后面不变量提升，return下面的进行变量提升；</li>
+<li rel="4">匿名函数不变量提升<code>（没有名字、函数表达式、自执行函数：代码执行，定义和执行一起完成）</code>；</li>
+<li rel="5">如果变量名重复，不重复声明，但重新定义</li>
+</ol>
+
+<h2 id="对象的定义">对象的定义</h2>
+
+<p>1.开辟一个空间地址； <br>
+2.把键值对存储到堆内存； <br>
+3.把空间地址赋值给对象名；</p>
+
+  <h2 id="day1">Day1</h2>
+
+  <h3 id="git">Git</h3>
+
+<blockquote>
+  <p>代码管理  <br>
+  git：分布式管理 <br>
+  svn：集中式管理 <br>
+  仓库【存放代码的地方】分为远程仓库和本地仓库 <br>
+  远程仓库：github ，免费的代码托管平台，将本地的代码推送到远程仓库进行分享、学习、和交流 <br>
+  本地仓库：工作区、暂存区、历史区</p>
+  
+  <p><strong>git 命令</strong></p>
+  
+  <p><code>git init</code> 将你的本地文件夹初始化变成一个git仓库 <br>
+  <code>git remote add【增加】 origin【远程仓库的命名】 url【远程仓库的地址】 ：</code> 将你的本地仓库和远程仓库建立连接 <br>
+  如果你的第一次操作git，你还需本机进行git配置 <br>
+  <code>git config --global user.name</code> 本机记录git用户名 <br>
+  <code>git config --global user.email</code>本机记录git邮箱 <br>
+  <code>git config --list</code> 查看你的git存储的用户名和邮箱</p>
+  
+  <p><code>git add .</code> :  .全部  【文件名】 -A全部 将文件推送到暂存区 <br>
+  <code>git commit -m"备注信息"</code> ： 将暂存区的内容推送到历史区，会生成版本号，可以根据版本号，回到任何一次你修改的位置 <br>
+  <code>git push origin【远程仓库名】 master【主分支名】</code> : 将历史区内容推送到远程仓库 <br>
+  <code>git clone url【远程仓库的地址】</code>: 将远程仓库的内容，下拉到本地，它已经是一个git仓库，且和远程仓库进行了连接</p>
+</blockquote>
+
+<h3 id="变量提升">变量提升</h3>
+
+<blockquote>
+  <p>定义：变量的提前声明</p>
+  
+  <ol><li rel="1">js可以在浏览器中运行，是因为浏览器给js提供了<em>*</em>环境，这个环境就是作用域</li>
+  <li rel="2">作用域分为全局作用域和私有作用域</li>
+  <li rel="3">全局作用域：浏览器一打开就形成了一个全局作用域</li>
+  <li rel="4">私有作用域：函数执行的时候会形成一个私有的作用域</li>
+  <li rel="5">块级作用域：除了私有作用域和对象以{}包裹的作用域都是块级作用域</li>
+  <li rel="6">变量提升的阶段：作用域形成之后，代码加载之前，</li>
+  <li rel="7">浏览器会对带var和function关键字进行声明和定义，</li>
+  <li rel="8">带var只声明不定义，带function关键字的声明加定义</li>
+  </ol>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">例：
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(a);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(f);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(fn);
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> a  =<span class="hljs-number">1</span> ;
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(a);
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> fn = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">f1()； <span class="hljs-comment">// undefined =&gt;5  5 5</span>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>)}
+</div><div class="hljs-line">f1()； <span class="hljs-comment">// 5 5 5</span>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{<span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>)}
+</div><div class="hljs-line">f1=<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{}
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{<span class="hljs-built_in">console</span>.log(<span class="hljs-number">3</span>)}
+</div><div class="hljs-line">f1()； <span class="hljs-comment">// f 5 f</span>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> f1 = <span class="hljs-number">2</span>;
+</div><div class="hljs-line">f1()； <span class="hljs-comment">//2=&gt;报错</span>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{<span class="hljs-built_in">console</span>.log(<span class="hljs-number">4</span>)}
+</div><div class="hljs-line">f1()；
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{<span class="hljs-built_in">console</span>.log(<span class="hljs-number">5</span>)}
+</div></code></pre>
+
+<h3 id="带var和不带var区别">带var和不带var区别</h3>
+
+<blockquote>
+  <ol><li rel="1">如果不带var 直接赋值相当于全局对象window直接添加一个属性并赋值</li>
+  <li rel="2">如果带var 在全局作用域下添加了一个变量，还给全局对象window增加了一个属性 <br>
+  <code>注意：带var的话可以不赋值，也相当于给局对象window增加了一个属性 例：var a ;  console.log(a); <br>
+  不带var的话必须赋值，否则会去全局对象window找这个属性，如果没有直接报错 例：y=1; 相当于window.y=1</code></li>
+  </ol>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">例：
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> x;
+</div><div class="hljs-line">    y=<span class="hljs-number">1</span>
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(y);<span class="hljs-comment">// window.y</span>
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(x);<span class="hljs-comment">//</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">   <span class="hljs-comment">/* var a =1 , b=2, c=3 ; // 用逗号分隔的话，表示连var，【相当于省略了写var】
+</span></div><div class="hljs-line">    var a =1
+</div><div class="hljs-line">    var b=2
+</div><div class="hljs-line">    var c=3 */
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">   <span class="hljs-comment">/*var a =1 ; b=2; c=3; // 用分号来分隔，前面带var的属于变量，不带var相当于给全局对象window增加了一个属性
+</span></div><div class="hljs-line">    var a =1 ;
+</div><div class="hljs-line">    window.b =2 ;
+</div><div class="hljs-line">    window.c = 3;*/
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">   <span class="hljs-keyword">var</span> a = b =c =<span class="hljs-number">1</span> ; <span class="hljs-comment">// 连等：带var的是一个变量，其他的不带var 相当于给全局对象window增加的属性</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> a =<span class="hljs-number">1</span> ;
+</div><div class="hljs-line">    <span class="hljs-built_in">window</span>.b =<span class="hljs-number">1</span> ;
+</div><div class="hljs-line">    <span class="hljs-built_in">window</span>.c =<span class="hljs-number">1</span> ;
+</div></code></pre>
+
+<h3 id="函数的变量提升">函数的变量提升</h3>
+
+<blockquote>
+  <ol><li rel="1">= 右边的不进行变量提升，变量提升只发生在 = 左边</li>
+  <li rel="2">函数当作参数的时候，不进行变量提升</li>
+  <li rel="3">自执行函数不会进行变量提升</li>
+  <li rel="4">条件判断中的函数： <br>
+  <ul>
+  <li>在条件判断之前，带var和带function都是只声明不定义， 当条件判断成立以后，第一件事给函数赋值，</li>
+  <li>条件不成立，判断体就不执行了， 结合了es6的块级作用域</li></ul></li>
+  <li rel="5">在函数当中，return右边的代码不进行变量提升，return下面的会进行变量提升  </li>
+  </ol>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-htmlbars hljs"><div class="hljs-line"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+</span></div><div class="hljs-line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</div></code></pre>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>)</span>{   <span class="hljs-comment">// 函数声明式 ，通过function关键字来申明的，声明+定义都完成了</span>
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(f);
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//console.log(f2); // f2未定义</span>
+</div><div class="hljs-line">  <span class="hljs-keyword">var</span> f = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f2</span> (<span class="hljs-params"></span>) </span>{} <span class="hljs-comment">// 函数表达式,这种方式创建的函数会被推崇，es6的箭头函数也是函数表达式的方式创建</span>
+</div><div class="hljs-line">  <span class="hljs-built_in">console</span>.log(f()); <span class="hljs-comment">// 匿名函数</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//console.log(fn);// fn未定义</span>
+</div><div class="hljs-line">  box.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">// 元素上的事件所对应的函数同样不进行变量提升</span>
+</div><div class="hljs-line">  }
+</div><div class="hljs-line">  <span class="hljs-built_in">console</span>.log(f2);<span class="hljs-comment">// f2 未定义</span>
+</div><div class="hljs-line">  setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f2</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">//函数为参数，不进行变量提升</span>
+</div><div class="hljs-line">  },<span class="hljs-number">13</span>)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">  alert(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f3</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">  })
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//自执行函数，不会变量提升</span>
+</div><div class="hljs-line">  <span class="hljs-built_in">console</span>.log(fn8)
+</div><div class="hljs-line">  (<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn8</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">  })()
+</div><div class="hljs-line">  (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{}());
+</div><div class="hljs-line">  !<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn8</span>(<span class="hljs-params"></span>) </span>{}();
+</div><div class="hljs-line">  +<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn8</span>(<span class="hljs-params"></span>) </span>{}();
+</div><div class="hljs-line">  ~<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn8</span>(<span class="hljs-params"></span>) </span>{}()
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//条件判断中的函数之变量提升</span>
+</div><div class="hljs-line">  <span class="hljs-built_in">console</span>.log(c);
+</div><div class="hljs-line">  <span class="hljs-built_in">console</span>.log(f1);
+</div><div class="hljs-line">  <span class="hljs-keyword">if</span>(<span class="hljs-string">'c'</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">window</span>){
+</div><div class="hljs-line">      <span class="hljs-keyword">var</span> c =<span class="hljs-number">2</span>
+</div><div class="hljs-line">      <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">          <span class="hljs-built_in">console</span>.log(c);
+</div><div class="hljs-line">      }
+</div><div class="hljs-line">  }
+</div><div class="hljs-line">  f1();
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//return</span>
+</div><div class="hljs-line">  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f3</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">     <span class="hljs-comment">// 私有变量：var function 形参</span>
+</div><div class="hljs-line">     <span class="hljs-built_in">console</span>.log(f4()); <span class="hljs-comment">// AAFF00</span>
+</div><div class="hljs-line">     <span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// undefined</span>
+</div><div class="hljs-line">     <span class="hljs-comment">// console.log(f2); // 不会进行变量提升</span>
+</div><div class="hljs-line">     <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f2</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">     }
+</div><div class="hljs-line">     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f4</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">// AAFF00</span>
+</div><div class="hljs-line">         <span class="hljs-built_in">console</span>.log(f3);
+</div><div class="hljs-line">     }
+</div><div class="hljs-line">     <span class="hljs-keyword">var</span> a = f4
+</div><div class="hljs-line">  }
+</div><div class="hljs-line">  f3();
+</div></code></pre>
+
+<h3 id="let-和-const-之变量提升">let 和 const 之变量提升</h3>
+
+<blockquote>
+  <p><strong>let 变量</strong></p>
+  
+  <ol><li rel="1">声明的变量没有变量提升</li>
+  <li rel="2">let 声明的变量不能重复声明</li>
+  <li rel="3">let 声明的变量不会给全局对象window增加属性 <br>
+  const 常量</li>
+  <li rel="1">let 声明的变量具有的特性，const都具有</li>
+  <li rel="2">const 声明的常量，如果值是基本数据类型，那么不可以进行修改；如果值是引用数据类型，我们可以操作引用地址，不可以替换引用地址</li>
+  <li rel="3">const 声明的常量必须赋值，不赋值报错 <br>
+  <code>注意：let 虽然不会进行变量提升，但是会检查当前作用域下是否有重复声明的变量</code></li>
+  </ol>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">例：
+</div><div class="hljs-line"> <span class="hljs-built_in">console</span>.log(a);<span class="hljs-comment">// a is not defined</span>
+</div><div class="hljs-line"> <span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span> ;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> <span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span> ;
+</div><div class="hljs-line"> <span class="hljs-keyword">let</span> a = <span class="hljs-number">2</span> ; <span class="hljs-comment">// 'a' has already been declared</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> a = <span class="hljs-number">1</span> ;
+</div><div class="hljs-line"> <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a) ; <span class="hljs-comment">// 1</span>
+</div><div class="hljs-line"> <span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span>;
+</div><div class="hljs-line"> <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.b) <span class="hljs-comment">// undefined</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> <span class="hljs-keyword">var</span> a =<span class="hljs-number">2</span>;
+</div><div class="hljs-line"> <span class="hljs-keyword">if</span>(<span class="hljs-string">'a'</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">window</span>) {
+</div><div class="hljs-line">     <span class="hljs-comment">//console.log(a);// 暂时性死区 ，在块级作用域下，不能提前拿到let声明的变量，我们叫这种现象叫做暂时性死区</span>
+</div><div class="hljs-line">     <span class="hljs-keyword">let</span> a =<span class="hljs-number">1</span>;
+</div><div class="hljs-line"> }
+</div><div class="hljs-line"> <span class="hljs-built_in">console</span>.log(a);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i =<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">3</span>;i++){
+</div><div class="hljs-line">    setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(i);<span class="hljs-comment">// 3X3 0 1 2</span>
+</div><div class="hljs-line">    },<span class="hljs-number">1000</span>)
+</div><div class="hljs-line">}
+</div></code></pre>
+
+
+
+<h3 id="作用域及作用域链">作用域及作用域链</h3>
+
+<blockquote>
+  <p><em>全局作用域：浏览器一打开就形成一个全局的作用域</em></p>
+  
+  <ol><li rel="1">全局变量：全局作用域下声明的变量就是全局变量</li>
+  <li rel="2">私有作用域：函数执行的时候会形成一个私有的作用域</li>
+  <li rel="3">私有变量：私有作用域下声明的变量叫做私有变量+形参</li>
+  <li rel="4">作用域链：主要发生在私有作用域当中 <br>
+  <code>在当前作用域下找到一个变量，优先找它的私有变量，如果私有变量没有，去它的上级(要看当前作用域下在哪儿开辟的 在哪儿开辟的，上级就是谁)找，如果上级还没有，一直找到全局，如果全局还没有就会报错</code></li>
+  </ol>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">例：
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> s=<span class="hljs-string">"1"</span>; <span class="hljs-comment">//'12'</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> g=<span class="hljs-number">10</span>;
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn1</span>(<span class="hljs-params">g</span>) </span>{ <span class="hljs-comment">// 11</span>
+</div><div class="hljs-line">        s+=<span class="hljs-number">2</span>;
+</div><div class="hljs-line">        g++;
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(g); <span class="hljs-comment">// 11</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    fn1(g);
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(s); <span class="hljs-comment">//'12'</span>
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(g); <span class="hljs-comment">// 10</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> aa=<span class="hljs-number">100</span>;
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> bb=<span class="hljs-number">200</span>;
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn2</span>(<span class="hljs-params">aa</span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(bb); <span class="hljs-comment">// un...</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">var</span> bb=<span class="hljs-number">1</span>;
+</div><div class="hljs-line">        aa=<span class="hljs-number">2</span>;
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(bb + aa);<span class="hljs-comment">//3 202</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    fn2(bb);
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(aa + bb);<span class="hljs-comment">//300</span>
+</div></code></pre>
+
+
+
+<h3 id="堆栈内存及释放">堆栈内存及释放</h3>
+
+<blockquote>
+  <ol><li rel="1">栈内存：俗称作用域；栈内存的形成，打开浏览器就形成了一个栈内存(全局)；函数执行的时候形成一个栈内存(私有)；栈内存一般情况下，是让js运行的环境；</li>
+  <li rel="2">栈内存释放：全局下的栈内存，关闭页面或者关闭浏览器都可以释放该栈内存；</li>
+  <li rel="3">私有下的栈内存，函数执行结束后，一般情况下该栈内存(私有)就会被释放；也有可能不会被释放</li>
+  <li rel="4">其他情况：该栈内存不会被释放，当前栈内存中有引用数据类型，被外界(变量、对象、元素上的一个事件)所占有，导致该栈内存不会被释放；</li>
+  <li rel="5">堆内存：浏览器加载的时候，碰到引用数据类型，都会开辟一个新的内存空间(对象：键值对；函数：代码字符串)，给这个内存空间赋值一个16进制的内存地址，将这个内存地址指向那个声明的变量，这个内存空间就是堆内存；</li>
+  <li rel="6">堆内存释放：如果想要释放该内存，我们需要手动将该内存指向null（指向空指针），浏览器会判断该堆内存没有变量去接收它，那么浏览器会在空闲的时候，将其释放；</li>
+  </ol>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">例：
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>);
+</div><div class="hljs-line">        <span class="hljs-keyword">var</span> a =<span class="hljs-number">2</span>
+</div><div class="hljs-line">        <span class="hljs-comment">// return function () {</span>
+</div><div class="hljs-line">        <span class="hljs-comment">//</span>
+</div><div class="hljs-line">        <span class="hljs-comment">// }</span>
+</div><div class="hljs-line">        <span class="hljs-built_in">window</span>.a = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> a = fn()
+</div><div class="hljs-line">    box.onclick = (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    })()
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> ary = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>];
+</div><div class="hljs-line">    ary = <span class="hljs-literal">null</span>;
+</div></code></pre>
+
+
+
+<h3 id="js中的堆栈内存">JS中的堆栈内存</h3>
+
+<blockquote>
+  <p><strong>栈内存</strong> <br>
+  俗称叫做作用域（全局作用域/私有作用域）</p>
+  
+  <ol><li rel="1">为js代码提供执行的环境（执行js代码的地方）</li>
+  <li rel="2">基本数据类型值是直接存放在栈内存中的</li>
+  </ol>
+  
+  <p><strong>堆内存</strong> <br>
+  存储引用数据类型值的（相当于一个存储的仓库）</p>
+  
+  <ol><li rel="1">对象存储的是键值对</li>
+  <li rel="2">函数存储的是代码字符串 <br>
+  <code>在项目中，内存越少性能越好，我们需要把一些没用的内存处理掉</code> <br>
+  [堆内存] <br>
+  var o = {};//当前对象对应的堆内存被变量o占用着，堆内存是无法销毁的 <br>
+  o = null;//null空对象指针（不指向任何的堆内存），此时上一次的堆内存就没有被占用了</li>
+  </ol>
+</blockquote>
+
+<h3 id="闭包">闭包</h3>
+
+<blockquote>
+  <ol><li rel="1">保护机制：闭包是一种保护机制，保护里面的私有变量不受外界的干扰</li>
+  <li rel="2">保存机制：当前私有作用域中，有引用数据类型被外界所占有，导致作用域变成一个不销毁的作用域；里面的私有变量 也就变成了不销毁的 变量</li>
+  </ol>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">例：
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> a =<span class="hljs-number">2</span>
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">var</span> a =<span class="hljs-number">1</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    f()
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span> ;<span class="hljs-comment">//2 3</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">            a++
+</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(a);
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> f = fn();
+</div><div class="hljs-line">    f();<span class="hljs-comment">//2</span>
+</div><div class="hljs-line">    fn()()<span class="hljs-comment">//2</span>
+</div><div class="hljs-line">    f()<span class="hljs-comment">//3</span>
+</div></code></pre>
+
+
+
+<h2 id="day2">Day2</h2>
+
+<blockquote>
+  <p><code>this</code> 是一个关键字，代表当前函数执行的主体； <br>
+  谁执行函数，执行主体this就是谁； <br>
+   this只代表值，不能赋值，但可以修改值； <br>
+   this的代表值取决于使用场景，场景不同，this值就不同；</p>
+  
+  <p><strong>this的用法：</strong></p>
+  
+  <ol><li rel="1">this在全局作用域下使用，它代表的就是全局对象window；</li>
+  <li rel="2">自执行函数当中的this全部都是window；</li>
+  <li rel="3">函数作为参数时，一般情况下this都是window；</li>
+  <li rel="4">元素事件上的函数，this一边情况都是当前元素；</li>
+  <li rel="5">函数执行，看函数执行的主体前面是否有点，有点，点前面是谁，this就是谁，没有点，this都是window； </li>
+  </ol>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">例：
+</div><div class="hljs-line"><span class="hljs-comment">//this在全局作用域下使用，它代表的就是全局对象window</span>
+</div><div class="hljs-line">  <span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;
+</div><div class="hljs-line">  <span class="hljs-built_in">console</span>.log(a);
+</div><div class="hljs-line">  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.a);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//自执行函数当中的this全部都是window；</span>
+</div><div class="hljs-line">  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">      <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>); <span class="hljs-comment">//window</span>
+</div><div class="hljs-line">      f(<span class="hljs-keyword">this</span>);
+</div><div class="hljs-line">      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);<span class="hljs-comment">//window</span>
+</div><div class="hljs-line">  })()
+</div><div class="hljs-line">  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params">n</span>) </span>{
+</div><div class="hljs-line">      <span class="hljs-built_in">console</span>.log(n);<span class="hljs-comment">//window</span>
+</div><div class="hljs-line">  }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//函数作为参数时，一般情况下this都是window；</span>
+</div><div class="hljs-line">  <span class="hljs-keyword">let</span> ary = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>];
+</div><div class="hljs-line">  ary.fonEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">      <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>); <span class="hljs-comment">//window</span>
+</div><div class="hljs-line">  })
+</div><div class="hljs-line"><span class="hljs-comment">//其他情况，像forEach map..第二个参数可以修改this指向</span>
+</div><div class="hljs-line">  setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">      <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>); <span class="hljs-comment">//window</span>
+</div><div class="hljs-line">  })
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//元素事件上的函数，this一边情况都是当前元素； </span>
+</div><div class="hljs-line"><span class="hljs-comment">//点击事件上的this</span>
+</div><div class="hljs-line">  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params">n</span>) </span>{
+</div><div class="hljs-line">      <span class="hljs-built_in">console</span>.log(n);<span class="hljs-comment">//window</span>
+</div><div class="hljs-line">  }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">  box.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">      <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>); <span class="hljs-comment">//box</span>
+</div><div class="hljs-line">      (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">          <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>); <span class="hljs-comment">//window</span>
+</div><div class="hljs-line">      }())
+</div><div class="hljs-line">  }
+</div><div class="hljs-line">  f(<span class="hljs-keyword">this</span>); <span class="hljs-comment">//box</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//函数执行，看函数执行的主体前面是否有点，有点，点前面是谁，this就是谁，没有点，this都是window；</span>
+</div><div class="hljs-line">  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params">n</span>) </span>{
+</div><div class="hljs-line">      <span class="hljs-built_in">console</span>.log(n);<span class="hljs-comment">//window</span>
+</div><div class="hljs-line">  }
+</div><div class="hljs-line">  <span class="hljs-keyword">var</span> obj = {
+</div><div class="hljs-line">      <span class="hljs-attr">fn</span>:<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">          <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);
+</div><div class="hljs-line">      },
+</div><div class="hljs-line">      <span class="hljs-attr">f</span>:(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">//自执行函数</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.f(<span class="hljs-keyword">this</span>);  <span class="hljs-comment">//window</span>
+</div><div class="hljs-line">      }())
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">  }
+</div><div class="hljs-line">  obj.fn(); <span class="hljs-comment">//obj</span>
+</div><div class="hljs-line">  <span class="hljs-keyword">let</span> a = obj.fn;
+</div><div class="hljs-line">  a(); <span class="hljs-comment">//window</span>
+</div><div class="hljs-line">  obj.f(); <span class="hljs-comment">//全局的f window</span>
+</div></code></pre>
+
+
+
+<h3 id="单例模式">单例模式</h3>
+
+<blockquote>
+  <p>设计模式</p>
+  
+  <ol><li rel="1"><p>模块化开发： <br>
+  把一个项目按照页面或者功能分割成不同的任务，交给项目中不同成员进行开发，开发结束之后将代码合并到一起，这种开发模式叫做模块化开发；</p>
+  
+  <ul>
+  <li>多人协作开发出现的问题：变量名、函数名冲突；</li>
+  <li>为了防止全局变量污染，我们可以选择闭包，但是只用闭包的方式是不完美的，我们需要搭配设计模式来进一步实现项目的开发；</li></ul></li>
+  <li rel="2"><p>单例模式：</p>
+  
+  <ul>
+  <li>表现形式就是一个对象，{name:XXX, age:function(){} }</li>
+  <li><code>定义</code>：把描述同一功能的属性和方法放到一个对象中（命名空间）中，这种设计模式叫做单例模式；</li>
+  <li>在设计模式当中，这个person1不仅仅是一个对象名，它是一个命名空间，多个命名空间是互相独立的，互不干扰；</li>
+  <li><p><code>好处</code>：不受全局变量的污染和干扰，并且可以相互调用方法</p></li>
+  <li><p><code>由来</code>：单例模式的本质就是一个对象，它Object类上的一个实例，实例与实例之间互不干扰，叫做单独的实例，简称”单例”；</p></li></ul></li>
+  </ol>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">例：
+</div><div class="hljs-line"><span class="hljs-comment">//多人协作开发出现的问题：变量名、函数名冲突</span>
+</div><div class="hljs-line"> <span class="hljs-keyword">var</span> name = <span class="hljs-string">'jd'</span>;
+</div><div class="hljs-line"> <span class="hljs-keyword">var</span> name = <span class="hljs-string">'jd-login'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> <span class="hljs-comment">//闭包</span>
+</div><div class="hljs-line">  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">  <span class="hljs-keyword">var</span> name = <span class="hljs-string">'jd'</span>;
+</div><div class="hljs-line">      <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">      }
+</div><div class="hljs-line">  })()
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">     <span class="hljs-keyword">var</span> name = <span class="hljs-string">'jd-login'</span>;
+</div><div class="hljs-line"> })()
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//在设计模式当中，这个person1不仅仅是一个对象名，它是一个命名空间，多个命名空间是互相独立的，互不干扰；</span>
+</div><div class="hljs-line"><span class="hljs-comment">//好处：不受全局变量的污染和干扰，并且可以相互调用方法</span>
+</div><div class="hljs-line">  <span class="hljs-keyword">let</span> person1 = {
+</div><div class="hljs-line">      <span class="hljs-attr">name</span>:<span class="hljs-string">'jd'</span>,
+</div><div class="hljs-line">      <span class="hljs-attr">home</span>:<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">          <span class="hljs-keyword">this</span>.name; <span class="hljs-comment">//通过this拿到值</span>
+</div><div class="hljs-line">          person2.logo();
+</div><div class="hljs-line">      }
+</div><div class="hljs-line">  }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">  <span class="hljs-keyword">let</span> person2 = {
+</div><div class="hljs-line">      <span class="hljs-attr">name</span>:<span class="hljs-string">'jd-logon'</span>,
+</div><div class="hljs-line">      <span class="hljs-attr">logo</span>:<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">      }
+</div><div class="hljs-line">  }
+</div></code></pre>
+
+
+
+<h3 id="高级单例模式">高级单例模式</h3>
+
+<blockquote>
+  <p><code>定义</code>：在高级单例模式当中，我们不只会把一个对象赋值一个命名空间，我们会让它先执行一个自执行函数，（就形成了一个闭包，一个不销毁的作用域）在自执行函数当中，返回一个对象给这个命名空间 <br>
+  <code>好处</code>：在这个私有的作用域中，创建很多的属性和方法，只需要把我们使用的属性和方法，暴露在这个对象当中即可；</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">例：
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> xiaoming = (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span>  name = <span class="hljs-string">"jd"</span>;
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span>{
+</div><div class="hljs-line">        <span class="hljs-attr">name</span>:name;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">})()
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//在这个私有的作用域中，创建很多的属性和方法，只需要把我们使用的属性和方法，暴露在这个对象当中即可;</span>
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> xiaoming = (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> name = <span class="hljs-string">'jd'</span>;
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">login</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"这是jd名称"</span>+name);
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">home</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"这是jd主页"</span>);
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span>  <span class="hljs-title">init</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment">//            this.login();</span>
+</div><div class="hljs-line"><span class="hljs-comment">//            this.home();</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">this</span>.login().home(); <span class="hljs-comment">//链式</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> {
+</div><div class="hljs-line">        home,
+</div><div class="hljs-line">        <span class="hljs-attr">login</span>:login, <span class="hljs-comment">//es6语法，在对象中，如果属性名和属性值相同时，可以简写一个；</span>
+</div><div class="hljs-line">        init
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">})()
+</div></code></pre>
+
+
+
+<h3 id="面向对象">面向对象</h3>
+
+<blockquote>
+  <p>js就是通过面向对象的思想设计开发出来的 <br>
+  <code>oop/op</code> ：面向对象缩写，面向对象思想 <br>
+  <code>定义</code>：面向类的封装、继承和多态，通过简单实例化，调用其方法和属性；</p>
+</blockquote>
+
+<p>学习面向对象，需了解，<code>对象、类、实例</code> <br>
+<code>对象</code>：万物皆对象，它多为一种泛指，比如我们常说的研究对象，这个对象可以是任何物体；</p>
+
+<p><code>类</code>：是对象当中具有同一属性和特征的集合，我们称之为类；类又分为大类和小类，例如：世间万物凡事有生命的物体，叫做生物类、生物类下（动物类、植物类 、人类，人类下男/女类）</p>
+
+<p><code>实例</code>：是类当中的一个具体的细分，我们研究当前实例具有哪些属性和方法，那么证明当前类中的其他实例也同样具有；</p>
+
+
+
+<h3 id="js中的内置类">js中的内置类</h3>
+
+<blockquote>
+  <p>在js中任何的数据类型都要它所属的类，除了null和undefined <br>
+  Number、String、Boolean、Object、Array、Regexp、Function、Date… Set\Map <br>
+  类的话首字母都是大写； <br>
+  类 执行通过new 来执行； <br>
+  <code>Object 对象类，被称为基类</code>，任何数据类型都是可以通过<em>_ _proto_ _</em>(原型链)找到基类 Object</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//通过字面量方式的形式来创建的</span>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> num =<span class="hljs-number">1</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//通过实例化的方式来创建</span>
+</div><div class="hljs-line"><span class="hljs-comment">//通过实例化创建出来的值，它是用对象包裹的，和字面量方式的创建表现形式不同而已，功能方法都一样；</span>
+</div><div class="hljs-line"><span class="hljs-comment">//基本数据类型通过实例化创建</span>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> num = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Number</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">//不传参数 是一个空实例</span>
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> num); <span class="hljs-comment">//boject</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> boo = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">true</span>);
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> str = <span class="hljs-keyword">new</span> <span class="hljs-built_in">String</span>(<span class="hljs-string">'str'</span>);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//引用数据类型方式创建</span>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> ary=<span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">//1是一个空格 ； "1" 像数组增加一个字符串["1"];</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>({<span class="hljs-attr">name</span>:<span class="hljs-string">'str'</span>});
+</div><div class="hljs-line"><span class="hljs-comment">//如果参数只有一个的话，这个参数就属于函数体中的内容；如果是2个或者2个以上，最后一个是函数体，其他都是形参</span>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> fn = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Function</span> (<span class="hljs-string">'a'</span>,<span class="hljs-string">'b'</span>,<span class="hljs-string">'return 1'</span>);
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">a,b</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+</div><div class="hljs-line">}
+</div></code></pre>
+
+
+
+<h3 id="构造函数模式">构造函数模式</h3>
+
+<blockquote>
+  <p>js 中的类除了内置类还有自定义类</p>
+  
+  <p><code>定义</code>：当一个函数通过new，关键字来执行的时候，这个函数就不是普通函数了，它是一个构造函数，也就是一个自定义类，当前的函数名，就是类名， <br>
+  函数的返回值就是类的实例；组件、插件、库使用； <br>
+  为了让构造函数和普通函数有区别，建议写构造函数时首字母大写（类名）；</p>
+  
+  <p>构造函数执行时，如果没有参数时，小括号可以不用写； <br>
+  <code>注意：一般情况下我们写业务逻辑不会用构造函数；但是在封装库、框架、插件以及组件的时候会用到构造函数模式；</code></p>
+  
+  <p><strong>普通函数的执行过程 闭包保存机制</strong></p>
+  
+  <ol><li rel="1">形成一个私有的作用域</li>
+  <li rel="2">形参赋值</li>
+  <li rel="3">变量提升</li>
+  <li rel="4">代码自上而下执行</li>
+  <li rel="5">判断当前作用域是否销毁</li>
+  </ol>
+  
+  <p><strong>构造函数执行过程</strong></p>
+  
+  <ol><li rel="1">形成一个私有的作用域</li>
+  <li rel="2">形参赋值</li>
+  <li rel="3">变量提升</li>
+  <li rel="4">浏览器会创建一个对象（为其开辟一个新的堆内存）将这个对象指向了this（堆内存指针指向了this实例）this就是实例</li>
+  <li rel="5">代码从上到下执行</li>
+  <li rel="6">判断当前构造函数是否有return，如果没有return默认将实例返回， <br>
+  如果有return：（如果return的是基本数据类型对实例没有影响，如果是引用数据类型(不要轻易写return)，那么实例就是该引用数据类型）；</li>
+  </ol>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//构造函数</span>
+</div><div class="hljs-line"> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Fn</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> }
+</div><div class="hljs-line"> <span class="hljs-comment">//fn();</span>
+</div><div class="hljs-line"> <span class="hljs-keyword">let</span>  f = <span class="hljs-keyword">new</span> Fn();
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">People</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">   <span class="hljs-comment">// console.log(a);</span>
+</div><div class="hljs-line">    <span class="hljs-comment">//this.a = a;</span>
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">let</span>  person1 = <span class="hljs-keyword">new</span> People(<span class="hljs-string">'zf'</span>);
+</div><div class="hljs-line"><span class="hljs-keyword">let</span>  person2 = <span class="hljs-keyword">new</span> People();
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(person1 == person2); <span class="hljs-comment">//实例与实例没有关系  不相等</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">People</span>(<span class="hljs-params">b</span>) </span>{
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> a=<span class="hljs-number">1</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">this</span>.name = b;
+</div><div class="hljs-line"><span class="hljs-keyword">this</span>.age=a;
+</div><div class="hljs-line"><span class="hljs-keyword">this</span>.say = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-comment">// return 1;</span>
+</div><div class="hljs-line"><span class="hljs-comment">// return {}</span>
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> person1 = <span class="hljs-keyword">new</span> People(<span class="hljs-string">'zf'</span>);
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> person2 = <span class="hljs-keyword">new</span> People(<span class="hljs-string">'zhufeng'</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(person1.say == person2.say);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.dri(person1);
+</div><div class="hljs-line"><span class="hljs-comment">//用 in 这种方式来判断 当前属性名（公有属性+私有属性）是否属于这个对象</span>
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">'dsfgsd'</span> <span class="hljs-keyword">in</span> person1);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">/*
+</span></div><div class="hljs-line">  什么情况下，属性会挂到 __proto_ 上   所有的公有属性
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> * 私有属性：
+</div><div class="hljs-line"> * 在构造函数中，给this添加属性值和方法，都属于当前实例的私有属性
+</div><div class="hljs-line"> *
+</div><div class="hljs-line"> * 公有属性：
+</div><div class="hljs-line"> * 当前实例通过__proto__找到所有的属性和方法都是属于当前实例的公有属性
+</div><div class="hljs-line"> * 补充：实例想要调取公有属性，直接.就可以调取（底层就是通过__proto__去找这个属性）如果没有就返回；undefined
+</div><div class="hljs-line"> *
+</div><div class="hljs-line"> * 用 in 这种方式来判断 当前属性名（公有属性+私有属性）是否属于这个对象
+</div><div class="hljs-line"> * console.log('hasOwnProperty' in person1);
+</div><div class="hljs-line"> *
+</div><div class="hljs-line"> * Object 类 提供了一个 hasOwnProperty 这个方法判断当前属性是否是该实例的私有属性,返回值是布尔类型 false/true
+</div><div class="hljs-line"> *
+</div><div class="hljs-line"> *
+</div><div class="hljs-line"> *
+</div><div class="hljs-line"> * */
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> person1.hasOwnProperty(<span class="hljs-string">'age'</span>);<span class="hljs-comment">//true</span>
+</div><div class="hljs-line"> person1.hasOwnProperty(<span class="hljs-string">'valueOf'</span>);<span class="hljs-comment">//false</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> <span class="hljs-comment">//封装一个方法，判断当前属性名是否是当前实例的一个公有属性 hasOwnProperty</span>
+</div><div class="hljs-line">   person1.__proto__.hasOwnProperty = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">str</span>) </span>{
+</div><div class="hljs-line">       <span class="hljs-comment">//判断参数值是当前实例的一个属性</span>
+</div><div class="hljs-line">       <span class="hljs-comment">// 判断是否是当前实例的一个私有属性，且取反</span>
+</div><div class="hljs-line">       <span class="hljs-keyword">return</span> str <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span> &amp;&amp; !(<span class="hljs-keyword">this</span>.hasOwnProperty(str));
+</div><div class="hljs-line"><span class="hljs-comment">//        if (str in this){</span>
+</div><div class="hljs-line"><span class="hljs-comment">//            if(this.hasOwnProperty(str)){</span>
+</div><div class="hljs-line"><span class="hljs-comment">//                return true;</span>
+</div><div class="hljs-line"><span class="hljs-comment">//            }else{</span>
+</div><div class="hljs-line"><span class="hljs-comment">//                return false;</span>
+</div><div class="hljs-line"><span class="hljs-comment">//            }</span>
+</div><div class="hljs-line"><span class="hljs-comment">//        }else{</span>
+</div><div class="hljs-line"><span class="hljs-comment">//            return false;</span>
+</div><div class="hljs-line"><span class="hljs-comment">//        }</span>
+</div><div class="hljs-line">   }
+</div><div class="hljs-line">   person1.hasOwnProperty(<span class="hljs-string">"a"</span>);
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+
+
+<h3 id="原型模式">原型模式</h3>
+
+<blockquote>
+  <p><code>函数：</code> <br>
+          普通函数、类（自定义类和内置类）、函数类的实例 <br>
+  <code>对象：</code> <br>
+          普通对象（对象数据类型） <br>
+          构造函数new 出来的一个实例 也是一个对象 </p>
+  
+  <p>类上面的原型也是一个对象 <br>
+  函数也是一个对象（万物皆对象）</p>
+  
+  <p><strong>学习原型模式需记住三句话</strong>：</p>
+  
+  <ol><li rel="1">所有的函数天生都自带一个属性，叫做prototype（原型） 它是一个对象 （既然是对象，那么就是一个堆内存）；</li>
+  <li rel="2">所有类的原型上面（就是开辟的这个堆内存），都天生自带一个属性，叫做construntor（构造函数）它指向当前类本身；</li>
+  <li rel="3">所有的对象天生自带一个属性_ <em>proto</em> _,它指向当前所属类的原型；</li>
+  </ol>
+  
+  <p><strong>原型链</strong></p>
+  
+  <ol><li rel="1">定义：一个实例要找属性，优先会去找自己的私有属性，如果自己的私有属性没有的话，会通过_ <em>proto</em> _找到自己所属类的原型上（公有属性），如果</li>
+  <li rel="2">公有属性还没有，继续通过_ <em>proto</em> _找到自己所属类的原型直到Object（基类）的原型上，一直找到基类还没有的话，直接返回undefined</li>
+  </ol>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">例：
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">People</span>(<span class="hljs-params">name</span>) </span>{
+</div><div class="hljs-line"> <span class="hljs-keyword">let</span> age=<span class="hljs-number">8</span>;
+</div><div class="hljs-line"> <span class="hljs-keyword">this</span>.name = name;
+</div><div class="hljs-line"> <span class="hljs-keyword">this</span>.age = age;
+</div><div class="hljs-line">}
+</div><div class="hljs-line">People.prototype.say = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"> <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> people1 = <span class="hljs-keyword">new</span> People(<span class="hljs-string">'zf'</span>);
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> people2 = <span class="hljs-keyword">new</span> People(<span class="hljs-string">'zhufeng'</span>);
+</div><div class="hljs-line"><span class="hljs-comment">// people1属于 People类</span>
+</div><div class="hljs-line"><span class="hljs-comment">// __proto__指向类  People的原型prototype</span>
+</div><div class="hljs-line">people1.__proto__ == People.prototype; <span class="hljs-comment">//true</span>
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(people1.__proto__ == People.prototype);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">people1.say == people2.say; <span class="hljs-comment">//true</span>
+</div></code></pre>
+
+
+
+<h3 id="object类和function类">object类和function类</h3>
+
+<blockquote>
+  <p><strong>Function 类</strong>： <br>
+      * 所有的类都是通过声明函数的方式来创建，由此得知所有的类（包括基类Object）都是函数类的一个实例；</p>
+  
+  <p><strong>object类</strong>: <br>
+      * 万物皆对象，js任何数据类型都可以通过_ <em>proto_</em>找到基类Object <br>
+      * 由此可得知：函数也是一个对象 也有_ <em>proto_</em>       </p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Function</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> }
+</div><div class="hljs-line"> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Function</span>();
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Number</span>(<span class="hljs-params"></span>) </span>{<span class="hljs-comment">//构造函数 函数类的一个实例}</span>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">String</span>(<span class="hljs-params"></span>) </span>{}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">/*
+</span></div><div class="hljs-line">* 判断一个实例是否属于一个类
+</div><div class="hljs-line">*
+</div><div class="hljs-line">* instanceof：判断一个实例是否属于一个类
+</div><div class="hljs-line">* constructor：通过实例来调用这个方法，指向当前类本身
+</div><div class="hljs-line">*
+</div><div class="hljs-line">* */
+</div><div class="hljs-line"><span class="hljs-keyword">new</span> <span class="hljs-built_in">Function</span>();
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span> <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Function</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">String</span> <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Function</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span> <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Function</span>);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">/*
+</span></div><div class="hljs-line">* object类
+</div><div class="hljs-line">* 万物皆对象，js任何数据类型都可以通过__proto__找到基类Object
+</div><div class="hljs-line">* */
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> ary = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>];
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(ary <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Object</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span> <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Object</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Function</span> <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Object</span>);
+</div></code></pre></div></div></div><a href="#name"><div class="bootom"><span>Top</span></div></a></body></html>
